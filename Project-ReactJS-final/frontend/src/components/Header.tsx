@@ -1,8 +1,132 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router'
 
 const Header = () => {
+  const [currentUser, setCurrentUser] = useState<{id: number, name: string, email: string} | null>(null)
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userFromStorage = localStorage.getItem('user')
+    if (userFromStorage) {
+      try {
+        const user = JSON.parse(userFromStorage)
+        setCurrentUser(user)
+      } catch (error) {
+        console.error('Error parsing user from localStorage:', error)
+        localStorage.removeItem('user')
+      }
+    }
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    setCurrentUser(null)
+    alert('Logged out successfully!')
+    window.location.reload() // Refresh page to update header
+  }
   return (
-    <div>Header</div>
+    <header className="bg-[rgb(233,226,222)] py-4 px-6">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+     
+        <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-bold">fb</span>
+            </div>
+            <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+              <span className="text-white text-sm">Ins</span>
+            </div>
+            <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+              <span className="text-white text-sm">Yt</span>
+            </div>
+          </div>
+
+          <nav className="flex items-center space-x-8">
+            <Link to="/element" className="text-gray-700 hover:text-black transition-colors text-sm">
+              Elements
+            </Link>
+            <Link to="/our-shop" className="text-gray-700 hover:text-black transition-colors text-sm">
+              Our Shop
+            </Link>
+            <Link to="/about" className="text-gray-700 hover:text-black transition-colors text-sm">
+              About us
+            </Link>
+         
+          </nav>
+        </div>
+
+        <Link to="/">
+          <div className="flex-1 flex justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold tracking-wider text-black">
+              Marseille
+            </h1>
+            <p className="text-xs text-gray-500 tracking-widest uppercase">
+              Xstore Theme
+            </p>
+          </div>
+        </div>
+        </Link>
+      
+        <div className="flex items-center space-x-6">
+             <Link to="/contact" className="text-gray-700 hover:text-black transition-colors text-sm">
+              Contacts
+            </Link>
+          <a href="#" className="text-gray-700 hover:text-black transition-colors text-sm">
+            Search
+          </a>
+          
+          {/* User Authentication Section */}
+          {currentUser ? (
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2 px-3 py-1 bg-gray-100 rounded-lg">
+                <div className="w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <span className="text-sm font-medium text-gray-700">
+                  {currentUser.name}
+                </span>
+              </div>
+              <button 
+                onClick={handleLogout}
+                className="text-gray-700 hover:text-black transition-colors text-sm"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/signin" className="text-gray-700 hover:text-black transition-colors text-sm">
+              Sign in
+            </Link>
+          )}
+  
+          <div className="flex items-center space-x-3">
+            <button className="p-1 hover:bg-gray-200 rounded">
+              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </button>
+      
+            <button className="p-1 hover:bg-gray-200 rounded">
+              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </button>
+
+            <button className="p-1 hover:bg-gray-200 rounded relative">
+              <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L7 13m0 0L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
+              </svg>
+              <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                0
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
   )
 }
 

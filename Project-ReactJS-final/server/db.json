@@ -1,0 +1,25 @@
+{
+  "account": [
+    {
+      "id": 1,
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "password123",
+      "createdAt": "2025-09-23T00:00:00.000Z"
+    },
+    {
+      "name": "Hoang Thien Long",
+      "email": "thienlong@gmail.com",
+      "password": "thienlong1234",
+      "createdAt": "2025-09-23T04:26:45.523Z",
+      "id": 2
+    },
+    {
+      "name": "Nguyen Van A",
+      "email": "anguyenvan@gmail.com",
+      "password": "nva123",
+      "createdAt": "2025-09-23T04:42:51.122Z",
+      "id": 3
+    }
+  ]
+}
