@@ -39,7 +39,7 @@ const Banner = () => {
         </div>
       </div>
       </div>
-       {/* Service */}
+    
       <div className="relative top-[-60px] bg-[#333] text-white py-9 max-w-7xl mx-auto px-6 z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 

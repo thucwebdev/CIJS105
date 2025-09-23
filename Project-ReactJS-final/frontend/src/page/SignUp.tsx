@@ -20,8 +20,7 @@ const SignUp = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }))
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -33,14 +32,12 @@ const SignUp = () => {
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {}
 
-    // Validate name
     if (!formData.name.trim()) {
       newErrors.name = 'Full name is required'
     } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters'
     }
-
-    // Validate email
+  
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
@@ -48,7 +45,6 @@ const SignUp = () => {
       newErrors.email = 'Please enter a valid email address'
     }
 
-    // Validate password
     if (!formData.password) {
       newErrors.password = 'Password is required'
     } else if (formData.password.length < 6) {
@@ -80,7 +76,7 @@ const SignUp = () => {
     setLoading(true)
 
     try {
-      // Check if email already exists
+
       const emailExists = await checkEmailExists(formData.email)
       if (emailExists) {
         setErrors({ email: 'Email already exists. Please use a different email.' })
@@ -88,7 +84,6 @@ const SignUp = () => {
         return
       }
 
-      // Create new account
       const newAccount = {
         name: formData.name.trim(),
         email: formData.email.toLowerCase().trim(),
@@ -107,18 +102,15 @@ const SignUp = () => {
       if (response.ok) {
         const createdAccount = await response.json()
         console.log('Account created successfully:', createdAccount)
-        
-        // Show success message
+   
         alert('Account created successfully! You can now sign in.')
-        
-        // Reset form
+   
         setFormData({
           name: '',
           email: '',
           password: ''
         })
-        
-        // Redirect to sign in page
+ 
         navigate('/signin')
       } else {
         throw new Error('Failed to create account')
@@ -136,7 +128,7 @@ const SignUp = () => {
     <Header></Header>
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        {/* Header */}
+  
         <div className="text-center mb-8">
           <div className="flex justify-center items-center mb-4">
             <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
@@ -149,8 +141,7 @@ const SignUp = () => {
             CREATE ACCOUNT
           </h2>
         </div>
-
-        {/* Form Container */}
+ 
         <div className="bg-white py-8 px-4 shadow-sm sm:rounded-lg sm:px-10 border border-gray-100">
           <div className="mb-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4 tracking-wide">
@@ -160,7 +151,6 @@ const SignUp = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Field */}
             <div>
               <label htmlFor="name" className="block text-sm text-gray-700 mb-2">
                 Full Name <span className="text-red-500">*</span>
@@ -182,8 +172,7 @@ const SignUp = () => {
                 <p className="mt-1 text-sm text-red-500">{errors.name}</p>
               )}
             </div>
-
-            {/* Email Field */}
+     
             <div>
               <label htmlFor="email" className="block text-sm text-gray-700 mb-2">
                 Email address <span className="text-red-500">*</span>
@@ -205,8 +194,7 @@ const SignUp = () => {
                 <p className="mt-1 text-sm text-red-500">{errors.email}</p>
               )}
             </div>
-
-            {/* Password Field */}
+          
             <div>
               <label htmlFor="password" className="block text-sm text-gray-700 mb-2">
                 Password <span className="text-red-500">*</span>
@@ -249,8 +237,7 @@ const SignUp = () => {
                 <p className="mt-1 text-sm text-red-500">{errors.password}</p>
               )}
             </div>
-
-            {/* Submit Button */}
+   
             <div>
               <button
                 type="submit"
@@ -275,8 +262,7 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-
-          {/* Login Link */}
+       
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?{' '}
@@ -289,8 +275,7 @@ const SignUp = () => {
             </p>
           </div>
         </div>
-
-        {/* Back to Home */}
+    
         <div className="mt-8 text-center">
           <Link 
             to="/" 

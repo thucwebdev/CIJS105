@@ -41,9 +41,9 @@ const ProductDetail = () => {
 
   if (!product) {
     return (
-      <>
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <div className="min-h-screen flex items-center justify-center">
+        <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               Product not found
@@ -52,18 +52,18 @@ const ProductDetail = () => {
               The product you're looking for doesn't exist.
             </p>
           </div>
-        </div>
-
+        </main>
         <Footer />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Back Button */}
+      <main className="flex-1">
+        <div className="max-w-7xl mx-auto px-6 py-12">
+
         <div className="mb-8">
           <Link
             to="/"
@@ -74,9 +74,9 @@ const ProductDetail = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Product Images */}
+
           <div className="space-y-4">
-            {/* Main Image */}
+          
             <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
               <img
                 src={selectedImage}
@@ -111,22 +111,20 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <div className="space-y-6">
-            {/* Product Name */}
+           
             <h1 className="text-3xl font-light text-gray-800">
               {product.name}
             </h1>
 
-            {/* Price */}
+          
             <div className="text-2xl font-semibold text-gray-900">
               ${(product.price / 1000).toFixed(2)}
             </div>
-
-            {/* Description */}
+            
             <p className="text-gray-600 leading-relaxed">
               {product.description}
             </p>
-
-            {/* Size Selection */}
+       
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
                 Size {selectedSize}
@@ -150,8 +148,7 @@ const ProductDetail = () => {
                 </button>
               </div>
             </div>
-
-            {/* Quantity */}
+          
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => handleQuantityChange(-1)}
@@ -167,8 +164,7 @@ const ProductDetail = () => {
                 +
               </button>
             </div>
-
-            {/* Action Buttons */}
+    
             <div className="space-y-4">
               <button className="w-full bg-gray-800 text-white py-3 px-6 hover:bg-gray-700 transition-colors flex items-center justify-center space-x-2">
                 <svg
@@ -193,8 +189,7 @@ const ProductDetail = () => {
                 BUY NOW
               </button>
             </div>
-
-            {/* Wishlist & Compare */}
+   
             <div className="flex items-center space-x-4">
               <button className="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
                 <svg
@@ -228,7 +223,6 @@ const ProductDetail = () => {
               </button>
             </div>
 
-            {/* Payment Info */}
             <div className="border-t pt-6">
               <p className="text-center text-sm text-gray-600 mb-4">
                 GUARANTEED SAFE CHECKOUT
@@ -260,7 +254,7 @@ const ProductDetail = () => {
               </p>
             </div>
 
-            {/* Product Meta */}
+          
             <div className="border-t pt-6 space-y-2 text-sm">
               <div className="flex">
                 <span className="font-medium text-gray-700 w-20">Brand:</span>
@@ -281,10 +275,10 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-      </div>
-
+        </div>
+        </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

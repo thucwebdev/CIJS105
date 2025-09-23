@@ -1,11 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
 * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   padding: 0;
   background-color: #f5f5f5;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }

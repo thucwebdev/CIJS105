@@ -18,8 +18,7 @@ const SignIn = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }))
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -31,7 +30,6 @@ const SignIn = () => {
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {}
 
-    // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required'
@@ -39,7 +37,6 @@ const SignIn = () => {
       newErrors.email = 'Please enter a valid email address'
     }
 
-    // Validate password
     if (!formData.password) {
       newErrors.password = 'Password is required'
     }
@@ -58,25 +55,21 @@ const SignIn = () => {
     setLoading(true)
 
     try {
-      // Check credentials with API
       const response = await fetch(`http://localhost:3000/account?email=${formData.email}&password=${formData.password}`)
       const accounts = await response.json()
 
       if (accounts.length > 0) {
         const user = accounts[0]
         console.log('Login successful:', user)
-        
-        // Save user info to localStorage
+    
         localStorage.setItem('user', JSON.stringify({
           id: user.id,
           name: user.name,
           email: user.email
         }))
-        
-        // Show success message
+      
         alert('Login successful!')
-        
-        // Redirect to home page
+   
         navigate('/')
       } else {
         setErrors({ 
@@ -95,7 +88,7 @@ const SignIn = () => {
   return (
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        {/* Header */}
+    
         <div className="text-center mb-8">
           <div className="flex justify-center items-center mb-4">
             <div className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
@@ -109,7 +102,7 @@ const SignIn = () => {
           </h2>
         </div>
 
-        {/* Form Container */}
+       
         <div className="bg-white py-8 px-4 shadow-sm sm:rounded-lg sm:px-10 border border-gray-100">
           <div className="mb-6">
             <h3 className="text-lg font-medium text-gray-900 mb-4 tracking-wide">
@@ -119,7 +112,7 @@ const SignIn = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
+        
             <div>
               <label htmlFor="email" className="block text-sm text-gray-700 mb-2">
                 Username or email address <span className="text-red-500">*</span>
@@ -135,8 +128,7 @@ const SignIn = () => {
                 placeholder=""
               />
             </div>
-
-            {/* Password Field */}
+          
             <div>
               <label htmlFor="password" className="block text-sm text-gray-700 mb-2">
                 Password <span className="text-red-500">*</span>
@@ -172,8 +164,7 @@ const SignIn = () => {
                 </button>
               </div>
             </div>
-
-            {/* Remember Me & Forgot Password */}
+     
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -198,8 +189,7 @@ const SignIn = () => {
                 </a>
               </div>
             </div>
-
-            {/* Submit Button */}
+  
             <div>
               <button
                 type="submit"
@@ -210,7 +200,6 @@ const SignIn = () => {
             </div>
           </form>
 
-          {/* Register Link */}
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
@@ -224,7 +213,6 @@ const SignIn = () => {
           </div>
         </div>
 
-        {/* Back to Home */}
         <div className="mt-8 text-center">
           <Link 
             to="/" 

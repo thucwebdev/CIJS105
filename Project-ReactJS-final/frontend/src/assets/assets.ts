@@ -19,12 +19,17 @@ import p_img10 from './cloth10.webp'
 import p_img11 from './shoes1.webp'
 import p_img12 from './shoes2.webp'
 
+import p_imgTime from './img_time.jpeg'
+
 import p_sale1 from './pic_sale1.webp'
 import p_sale2 from './pic_sale2.webp'
 
+import hamburger from './hamburger.png'
 export const images = [
-    p_sale1 , p_sale2
+    p_sale1 , p_sale2 , p_imgTime,hamburger
 ]
+
+export { p_imgTime, hamburger }
 
 export const products = [
     {
