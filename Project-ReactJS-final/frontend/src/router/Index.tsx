@@ -7,6 +7,8 @@ import SignIn from "../page/SignIn";
 import ProductDetail from "../page/ProductDetail";
 import SignUp from "../page/SignUp";
 import { CartOrder } from "../page/CartOrder";
+import { Checkout } from "../page/Checkout";
+import { OurShop } from "../page/OurShop";
 
 export const routes = createBrowserRouter([
     {
@@ -20,6 +22,10 @@ export const routes = createBrowserRouter([
     {
         path: "about",
         element: <About></About>
+    },
+    {
+        path: "our-shop",
+        element: <OurShop></OurShop>
     },
     {
         path: "signin",
@@ -36,6 +42,10 @@ export const routes = createBrowserRouter([
     {
         path: "cart",
         element: <CartOrder></CartOrder>
+    },
+    {
+        path: "checkout",
+        element: <Checkout></Checkout>
     },
     {
         path: "*",

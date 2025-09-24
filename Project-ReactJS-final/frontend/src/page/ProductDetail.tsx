@@ -159,7 +159,7 @@ const ProductDetail = () => {
 
           
             <div className="text-2xl font-semibold text-gray-900">
-              ${(product.price / 1000).toFixed(2)}
+              {product.price.toLocaleString('vi-VN')} ₫
             </div>
             
             <p className="text-gray-600 leading-relaxed">

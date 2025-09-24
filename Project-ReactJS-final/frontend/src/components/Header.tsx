@@ -41,17 +41,16 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // Initial cart count load
+
     updateCartCount();
 
-    // Listen for storage events (when cart is updated)
+
     const handleStorageChange = () => {
       updateCartCount();
     };
 
     window.addEventListener('storage', handleStorageChange);
 
-    // Cleanup
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
@@ -74,8 +73,8 @@ const Header = () => {
           </div>
 
           <nav className="flex items-center space-x-8">
-            <Link to="/element" className="text-gray-700 hover:text-black transition-colors text-sm">
-              Elements
+            <Link to="/" className="text-gray-700 hover:text-black transition-colors text-sm">
+              Home
             </Link>
             <Link to="/our-shop" className="text-gray-700 hover:text-black transition-colors text-sm">
               Our Shop
@@ -110,14 +109,14 @@ const Header = () => {
         </Link>
       
         <div className="flex items-center space-x-6">
-          {/* Desktop menu items */}
+
           <div className="hidden lg:flex items-center space-x-6">
             <Link to="/contact" className="text-gray-700 hover:text-black transition-colors text-sm">
               Contacts
             </Link>
-            <a href="#" className="text-gray-700 hover:text-black transition-colors text-sm">
+            <Link to="/search" className="text-gray-700 hover:text-black transition-colors text-sm">
               Search
-            </a>
+            </Link>
           </div>
           
           {/* User Authentication Section */}
@@ -149,17 +148,23 @@ const Header = () => {
           <div className="flex items-center space-x-3">
         
             <div className="hidden lg:flex items-center space-x-3">
-              <button className="p-1 hover:bg-gray-200 hover:cursor-pointer rounded">
+              <Link to="/comments">
+                <button className="p-1 hover:bg-gray-200 hover:cursor-pointer rounded">
                 <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </button>
-        
+              </Link>
+              
+
+              <Link to="/wishlist">
               <button className="p-1 hover:bg-gray-200 hover:cursor-pointer rounded">
                 <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </button>
+              </Link>
+              
             </div>
 
     

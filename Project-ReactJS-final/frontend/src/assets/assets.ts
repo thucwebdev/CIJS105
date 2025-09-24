@@ -24,12 +24,26 @@ import p_imgTime from './img_time.jpeg'
 import p_sale1 from './pic_sale1.webp'
 import p_sale2 from './pic_sale2.webp'
 
+import p_about1 from './img_about1.jpg'
+import p_about2 from './img_about2.jpg'
+
+import p_brand1 from './img_brand1.png'
+import p_brand2 from './img_brand2.png'
+import p_brand3 from './img_brand3.png'
+import p_brand4 from './img_brand4.png'
+import p_brand5 from './img_brand5.png'
+
+
+
+
 import hamburger from './hamburger.png'
+
+
 export const images = [
     p_sale1 , p_sale2 , p_imgTime,hamburger
 ]
 
-export { p_imgTime, hamburger }
+export { p_imgTime, hamburger , p_about1, p_about2 , p_brand1 , p_brand2 , p_brand3 , p_brand4 , p_brand5 }
 
 export const products = [
     {

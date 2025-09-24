@@ -126,9 +126,12 @@ export const CartOrder = () => {
                 </div>
                 
                 <div className="flex space-x-4">
-                  <button className="flex-1 bg-gray-800 text-white py-3 px-6 rounded hover:bg-gray-700 transition-colors">
+                  <Link 
+                    to="/checkout" 
+                    className="flex-1 bg-gray-800 text-white py-3 px-6 rounded hover:bg-gray-700 transition-colors text-center"
+                  >
                     Đặt hàng
-                  </button>
+                  </Link>
                   <Link 
                     to="/" 
                     className="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded hover:bg-gray-50 transition-colors text-center"
