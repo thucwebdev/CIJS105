@@ -6,6 +6,7 @@ import About from "../page/About";
 import SignIn from "../page/SignIn";
 import ProductDetail from "../page/ProductDetail";
 import SignUp from "../page/SignUp";
+import { CartOrder } from "../page/CartOrder";
 
 export const routes = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const routes = createBrowserRouter([
     {
         path: "product/:id",
         element: <ProductDetail></ProductDetail>
+    },
+    {
+        path: "cart",
+        element: <CartOrder></CartOrder>
     },
     {
         path: "*",

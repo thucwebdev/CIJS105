@@ -5,6 +5,7 @@ import { hamburger } from '../assets/assets'
 const Header = () => {
   const [currentUser, setCurrentUser] = useState<{id: number, name: string, email: string} | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
 
 
   useEffect(() => {
@@ -27,6 +28,34 @@ const Header = () => {
     alert('Logged out successfully!')
     window.location.reload() 
   }
+
+  const updateCartCount = () => {
+    const cart = localStorage.getItem('cart');
+    if (cart) {
+      const cartItems = JSON.parse(cart);
+      const totalItems = cartItems.reduce((sum: number, item: { quantity: number }) => sum + item.quantity, 0);
+      setCartCount(totalItems);
+    } else {
+      setCartCount(0);
+    }
+  };
+
+  useEffect(() => {
+    // Initial cart count load
+    updateCartCount();
+
+    // Listen for storage events (when cart is updated)
+    const handleStorageChange = () => {
+      updateCartCount();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
   return (
     <header className="bg-[rgb(233,226,222)] py-4 px-6 relative">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -134,14 +163,16 @@ const Header = () => {
             </div>
 
     
-            <button className="p-1 hover:bg-gray-200 rounded relative">
+            <Link to="/cart" className="p-1 hover:bg-gray-200 rounded relative block">
               <svg className="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L7 13m0 0L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
               </svg>
-              <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                0
-              </span>
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
       </div>

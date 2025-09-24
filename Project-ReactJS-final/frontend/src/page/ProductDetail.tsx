@@ -39,6 +39,47 @@ const ProductDetail = () => {
     setQuantity((prev) => Math.max(1, prev + change));
   };
 
+  const addToCart = () => {
+    if (!product) return;
+
+    const cartItem = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image[0],
+      size: selectedSize,
+      quantity: quantity,
+      category: product.category,
+      subCategory: product.subCategory
+    };
+
+    // Get existing cart from localStorage
+    const existingCart = localStorage.getItem('cart');
+    const cart = existingCart ? JSON.parse(existingCart) : [];
+
+    // Check if product already exists in cart
+    const existingItemIndex = cart.findIndex(
+      (item: { id: string; size: string }) => item.id === product._id && item.size === selectedSize
+    );
+
+    if (existingItemIndex > -1) {
+      // Update quantity if item exists
+      cart[existingItemIndex].quantity += quantity;
+    } else {
+      // Add new item to cart
+      cart.push(cartItem);
+    }
+
+    // Save updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Show success message
+    alert(`${product.name} (${selectedSize}) đã được thêm vào giỏ hàng!`);
+    
+    // Update cart count in header (trigger a storage event)
+    window.dispatchEvent(new Event('storage'));
+  };
+
   if (!product) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -166,7 +207,10 @@ const ProductDetail = () => {
             </div>
     
             <div className="space-y-4">
-              <button className="w-full bg-gray-800 text-white py-3 px-6 hover:bg-gray-700 transition-colors flex items-center justify-center space-x-2">
+              <button 
+                onClick={addToCart}
+                className="w-full bg-gray-800 text-white py-3 px-6 hover:bg-gray-700 transition-colors flex items-center justify-center space-x-2"
+              >
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -177,7 +221,7 @@ const ProductDetail = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L7 13m0 0L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L7 13m0 0L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v6a2 2 0 01-2 2H9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
                   />
                 </svg>
                 <span>ADD TO CART</span>
